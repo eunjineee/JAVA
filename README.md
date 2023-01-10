@@ -38,3 +38,4 @@ https://www.youtube.com/watch?v=frI5CoZe-vE&list=PLZzruF3-_clsWF2aULPsUPomgolJ-i
 
 ✨  페이징 처리
 
+✨  검색 기능
