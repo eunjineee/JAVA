@@ -39,3 +39,9 @@ https://www.youtube.com/watch?v=frI5CoZe-vE&list=PLZzruF3-_clsWF2aULPsUPomgolJ-i
 ✨  페이징 처리
 
 ✨  검색 기능
+
+
+
+### 마무리
+
+23.01.10 스프링 부트 동작 원리 이해 + 자바 언어 익히기
