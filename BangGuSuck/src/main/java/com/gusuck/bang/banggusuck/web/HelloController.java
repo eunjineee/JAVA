@@ -1,4 +1,4 @@
-package com.gusuck.bang.web;
+package com.gusuck.bang.banggusuck.web;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
     @GetMapping("/hello")
-    public String hello(){
+    public String hello() {
         return "hello";
     }
 }
