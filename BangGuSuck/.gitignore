@@ -37,4 +37,4 @@ out/
 .vscode/
 
 ## API ##
-application-oauth.properties
+!**/src/main/resource/application-oauth.properties
