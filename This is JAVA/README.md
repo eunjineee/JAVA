@@ -12,7 +12,7 @@
 
 ### 구현 사진
 
-![image-20230112110010996](C:\Users\SSAFY\Desktop\JAVA\This is JAVA\assets\image-20230112110010996.png)
+![image-20230112110010996](assets/image-20230112110010996.png)
 
 
 
