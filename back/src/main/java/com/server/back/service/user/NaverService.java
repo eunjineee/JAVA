@@ -23,8 +23,8 @@ public class NaverService {
 
     private final UserRepository userRepository;
 
-    private final String client_id = "5EqPiMEcHUi0GoU53TMk";
-    private final String client_secret = "OosqHTwmkF";
+    private final String client_id = "Pi2zJMcupNEz5EsZRzh6";
+    private final String client_secret = "ZGtXcgsvcR";
     private final String redirect_uri = "http://localhost:8880/login/oauth2/code/naver";
     private final String accessTokenUri = "https://nid.naver.com/oauth2.0/token";
     private final String UserInfoUri = "https://openapi.naver.com/v1/nid/me";
@@ -41,6 +41,7 @@ public class NaverService {
         params.add("redirect_uri",redirect_uri);
         params.add("code", code);
         params.add("client_secret", client_secret);
+        params.add("state", "test");
 
 
         //request

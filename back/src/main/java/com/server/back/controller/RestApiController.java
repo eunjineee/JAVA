@@ -78,8 +78,8 @@ public class RestApiController {
         return jwtService.successLoginResponse(jwtToken);
     }
     @GetMapping("/login/oauth2/code/naver")
-    public String NaverCode(@RequestParam("code") String code) {
-        return "네이버 로그인 인증완료, code: "  + code;
+    public String NaverCode(@RequestParam("code")String code,@RequestParam("state")String state) {
+        return "네이버 로그인 인증완료, code: "+ code + "네이버 로그인 인증완료, state: "  + state;
     }
 
 

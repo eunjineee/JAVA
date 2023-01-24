@@ -14,6 +14,7 @@ import java.util.List;
 @Entity @Data
 @NoArgsConstructor
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="user_id")

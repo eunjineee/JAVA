@@ -1,4 +1,5 @@
 package com.server.back.jwt.refreshToken;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

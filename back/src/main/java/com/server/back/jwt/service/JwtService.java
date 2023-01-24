@@ -40,7 +40,7 @@ public class JwtService {
         RefreshToken userRefreshToken = user.getJwtRefreshToken();
 
         //처음 서비스를 이용하는 사용자(refresh 토큰이 없는 사용자)
-        if(userRefreshToken ==null) {
+        if(userRefreshToken == null) {
 
             //access, refresh 토큰 생성
             JwtToken jwtToken = jwtProviderService.createJwtToken(user.getId(), user.getUserid());
