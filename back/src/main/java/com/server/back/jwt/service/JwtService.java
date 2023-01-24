@@ -147,7 +147,7 @@ public class JwtService {
         return map;
     }
 
-    //인증 요구 json response (jwt 토큰이 필요한 요구)
+//    인증 요구 json response (jwt 토큰이 필요한 요구)
     public Map<String, String> requiredJwtTokenResponse() {
         Map<String ,String> map = new LinkedHashMap<>();
         map.put("status", "401");

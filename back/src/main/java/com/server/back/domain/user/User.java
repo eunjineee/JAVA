@@ -32,12 +32,16 @@ public class User {
     private LocalDateTime createTime;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "refreshToken")
+    @JoinColumn(name = "refreshTokenId")
     private RefreshToken jwtRefreshToken;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region")
+    private Region region;
 
     @Builder
     public User(String userid, String password, String roles, String nickname, String profileImg,
-                String email,LocalDateTime createTime,String provider) {
+                String email,LocalDateTime createTime,String provider,Region region,RefreshToken jwtRefreshToken) {
         this.userid = userid;
         this.password = password;
         this.roles = roles;
@@ -46,6 +50,8 @@ public class User {
         this.email = email;
         this.createTime = createTime;
         this.provider = provider;
+        this.region = region;
+        this.jwtRefreshToken = jwtRefreshToken;
     }
 
 

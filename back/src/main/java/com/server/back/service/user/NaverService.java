@@ -25,7 +25,7 @@ public class NaverService {
 
     private final String client_id = "Pi2zJMcupNEz5EsZRzh6";
     private final String client_secret = "ZGtXcgsvcR";
-    private final String redirect_uri = "http://localhost:8880/login/oauth2/code/naver";
+    private final String redirect_uri = "http://localhost:8080/login/oauth2/code/naver";
     private final String accessTokenUri = "https://nid.naver.com/oauth2.0/token";
     private final String UserInfoUri = "https://openapi.naver.com/v1/nid/me";
 
@@ -33,7 +33,7 @@ public class NaverService {
      * 카카오로 부터 엑세스 토큰을 받는 함수
      */
     public NaverToken getAccessToken(String code) {
-
+        System.out.println("===========시작??=================");
         //요청 param (body)
         MultiValueMap<String , String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");

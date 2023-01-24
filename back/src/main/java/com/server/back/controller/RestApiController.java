@@ -66,15 +66,15 @@ public class RestApiController {
      * JWT를 이용한 네이버 로그인
      */
 
-    @GetMapping("/api/oauth/token/naver")
+    @GetMapping("/api/oauth2/token/naver")
     public Map<String, String> NaverLogin(@RequestParam("code") String code) {
 
         NaverToken oauthToken = naverService.getAccessToken(code);
-
+        System.out.println("===========11111111111111111=================");
         User saveUser = naverService.saveUser(oauthToken.getAccess_token());
-
+        System.out.println("===========222222222222222=================");
         JwtToken jwtToken = jwtService.joinJwtToken(saveUser.getUserid());
-
+        System.out.println("===========3333333333333333=================");
         return jwtService.successLoginResponse(jwtToken);
     }
     @GetMapping("/login/oauth2/code/naver")
