@@ -83,7 +83,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
 
         //token 생성
-        JwtToken jwtToken = jwtService.joinJwtToken(principalDetails.getUser().getUserid());
+        JwtToken jwtToken = jwtService.joinJwtToken(principalDetails.getUser().getUsername());
 
         ObjectMapper objectMapper = new ObjectMapper();
 

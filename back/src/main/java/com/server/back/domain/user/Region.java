@@ -1,6 +1,7 @@
 package com.server.back.domain.user;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,7 @@ public class Region {
 
     private String gugunName;
 
+    @Builder
     public Region(String regionCode, String sidoName, String gugunName) {
         this.regionCode = regionCode;
         this.sidoName = sidoName;

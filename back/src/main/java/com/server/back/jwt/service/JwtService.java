@@ -34,16 +34,16 @@ public class JwtService {
      * access, refresh 토큰 생성
      */
     @Transactional
-    public JwtToken joinJwtToken(String userId) {
+    public JwtToken joinJwtToken(String username) {
 
-        User user = userRepository.findByUserid(userId);
+        User user = userRepository.findByUsername(username);
         RefreshToken userRefreshToken = user.getJwtRefreshToken();
 
         //처음 서비스를 이용하는 사용자(refresh 토큰이 없는 사용자)
         if(userRefreshToken == null) {
 
             //access, refresh 토큰 생성
-            JwtToken jwtToken = jwtProviderService.createJwtToken(user.getId(), user.getUserid());
+            JwtToken jwtToken = jwtProviderService.createJwtToken(user.getUserid(), user.getUsername());
 
             //refreshToken 생성
             RefreshToken refreshToken = new RefreshToken(jwtToken.getRefreshToken());
@@ -64,7 +64,7 @@ public class JwtService {
             }
             else { //refresh 토큰 기간만료
                 //새로운 access, refresh 토큰 생성
-                JwtToken newJwtToken = jwtProviderService.createJwtToken(user.getId(), user.getUserid());
+                JwtToken newJwtToken = jwtProviderService.createJwtToken(user.getUserid(), user.getUsername());
 
                 user.SetRefreshToken(newJwtToken.getRefreshToken());
                 return newJwtToken;
@@ -99,9 +99,9 @@ public class JwtService {
      * refresh 토큰 validate
      */
     @Transactional
-    public JwtToken validRefreshToken(String userid, String refreshToken) {
+    public JwtToken validRefreshToken(String username, String refreshToken) {
 
-        User findUser = userRepository.findByUserid(userid);
+        User findUser = userRepository.findByUsername(username);
 
         //전달받은 refresh 토큰과 DB의 refresh 토큰이 일치하는지 확인
         RefreshToken findRefreshToken = sameCheckRefreshToken(findUser, refreshToken);
@@ -115,7 +115,7 @@ public class JwtService {
         }
         //refresh 토큰이 만료됨 -> access, refresh 토큰 모두 재발급
         else {
-            JwtToken newJwtToken = jwtProviderService.createJwtToken(findUser.getId(), findUser.getUserid());
+            JwtToken newJwtToken = jwtProviderService.createJwtToken(findUser.getUserid(), findUser.getUsername());
             findUser.SetRefreshToken(newJwtToken.getRefreshToken());
             return newJwtToken;
         }
@@ -172,5 +172,8 @@ public class JwtService {
         map.put("refreshToken", jwtToken.getRefreshToken());
         return map;
     }
+
+
+
 
 }

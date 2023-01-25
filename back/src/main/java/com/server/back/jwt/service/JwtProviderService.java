@@ -20,22 +20,22 @@ public class JwtProviderService {
     /**
      * accessToken, refreshToken 생성
      */
-    public JwtToken createJwtToken(Long id, String userId) {
+    public JwtToken createJwtToken(Long userid, String username) {
 
         //Access token 생성
         String accessToken = JWT.create()
-                .withSubject(userId)
+                .withSubject(username)
                 .withExpiresAt(new Date(System.currentTimeMillis() + JwtProperties.AccessToken_TIME))
-                .withClaim("id", id)
-                .withClaim("userid", userId)
+                .withClaim("userid", userid)
+                .withClaim("username", username)
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
         //Refresh token 생성
         String refreshToken = JWT.create()
-                .withSubject(userId)
+                .withSubject(username)
                 .withExpiresAt(new Date(System.currentTimeMillis() + JwtProperties.RefreshToken_TIME))
-                .withClaim("id", id)
-                .withClaim("userid", userId)
+                .withClaim("userid", userid)
+                .withClaim("username", username)
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
         return JwtToken.builder()
@@ -47,13 +47,13 @@ public class JwtProviderService {
     /**
      * access token 생성
      */
-    public String createAccessToken(Long id , String userId) {
+    public String createAccessToken(Long userid, String username) {
 
         String accessToken = JWT.create()
-                .withSubject(userId)
+                .withSubject(username)
                 .withExpiresAt(new Date(System.currentTimeMillis() + JwtProperties.AccessToken_TIME))
-                .withClaim("id", id)
-                .withClaim("userid", userId)
+                .withClaim("userid", userid)
+                .withClaim("username", username)
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
         return accessToken;

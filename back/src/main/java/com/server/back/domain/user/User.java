@@ -18,18 +18,22 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="user_id")
-    private Long id;
+    private Long userid;//우리 pk
 
-    private String userid; //일반사용자-입력한 아이디, 카카오 사용자-카카오 고유 id(provider id)
+    private String username; //네이버 id pk
     private String password;
-    private String roles; //USER,ADMIN 게 넣을것이다.
-
-    private String provider;
     private String nickname;
-    private String profileImg;
-    private String email;
+    private String profile;
+    private String comment;
+    private String gender;
+    private String birth;
+    private Double manner;
+    private Integer point;
+    private Integer is_ban;
+    private Integer report_point;
+    private String role; //USER,ADMIN 게 넣을것이다.
+    private LocalDateTime time;
 
-    private LocalDateTime createTime;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "refreshTokenId")
@@ -40,16 +44,23 @@ public class User {
     private Region region;
 
     @Builder
-    public User(String userid, String password, String roles, String nickname, String profileImg,
-                String email,LocalDateTime createTime,String provider,Region region,RefreshToken jwtRefreshToken) {
+    public User(Long userid, String username, String password, String nickname, String profile, String comment,
+                String gender, String birth, Double manner, Integer point, Integer is_ban, Integer report_point,
+                String role,LocalDateTime time, Region region, RefreshToken jwtRefreshToken) {
         this.userid = userid;
+        this.username = username;
         this.password = password;
-        this.roles = roles;
         this.nickname = nickname;
-        this.profileImg = profileImg;
-        this.email = email;
-        this.createTime = createTime;
-        this.provider = provider;
+        this.profile = profile;
+        this.comment = comment;
+        this.gender = gender;
+        this.birth = birth;
+        this.manner = manner;
+        this.point = point;
+        this.is_ban = is_ban;
+        this.report_point = report_point;
+        this.role = role;
+        this.time = time;
         this.region = region;
         this.jwtRefreshToken = jwtRefreshToken;
     }
@@ -69,8 +80,8 @@ public class User {
      * 사용자가 다양한 권한을 가지고 있을수 있음
      */
     public List<String> getRoleList() {
-        if(this.roles.length()>0) {
-            return Arrays.asList(this.roles.split(","));
+        if(this.role.length()>0) {
+            return Arrays.asList(this.role.split(","));
         }
         return new ArrayList<>();
     }

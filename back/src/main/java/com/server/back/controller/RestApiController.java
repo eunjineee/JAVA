@@ -35,30 +35,30 @@ public class RestApiController {
         return "index";
     }
 
-    @PostMapping("/join")
-    public String join(@ModelAttribute User user){
+//    @PostMapping("/join")
+//    public String join(@ModelAttribute User user){
+//
+//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//        user.setRole("USER");
+//        user.setTime(LocalDateTime.now());
+//        userRepository.save(user);
+//
+//        return "회원가입완료";
+//    }
 
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles("USER");
-        user.setCreateTime(LocalDateTime.now());
-        userRepository.save(user);
-
-        return "회원가입완료";
-    }
-
-    @GetMapping("/api/v1/user")
-    public String test1() {
-        return "success";
-    }
-
-    @GetMapping("/api/v1/manager")
-    public String test2() {
-        return "success";
-    }
-    @GetMapping("/api/v1/admin")
-    public String test3() {
-        return "success";
-    }
+//    @GetMapping("/api/v1/user")
+//    public String test1() {
+//        return "success";
+//    }
+//
+//    @GetMapping("/api/v1/manager")
+//    public String test2() {
+//        return "success";
+//    }
+//    @GetMapping("/api/v1/admin")
+//    public String test3() {
+//        return "success";
+//    }
 
 
 
@@ -70,11 +70,11 @@ public class RestApiController {
     public Map<String, String> NaverLogin(@RequestParam("code") String code) {
 
         NaverToken oauthToken = naverService.getAccessToken(code);
-        System.out.println("===========11111111111111111=================");
+
         User saveUser = naverService.saveUser(oauthToken.getAccess_token());
-        System.out.println("===========222222222222222=================");
-        JwtToken jwtToken = jwtService.joinJwtToken(saveUser.getUserid());
-        System.out.println("===========3333333333333333=================");
+
+        JwtToken jwtToken = jwtService.joinJwtToken(saveUser.getUsername());
+
         return jwtService.successLoginResponse(jwtToken);
     }
     @GetMapping("/login/oauth2/code/naver")
@@ -83,23 +83,20 @@ public class RestApiController {
     }
 
 
-
-
     /**
      * refresh token 재발급
      * @return
      */
-    @GetMapping("/refresh/{userId}")
-    public Map<String,String> refreshToken(@PathVariable("userId") String userid, @RequestHeader("refreshToken") String refreshToken,
+    @GetMapping("/refresh/{username}")
+    public Map<String,String> refreshToken(@PathVariable("username") String username, @RequestHeader("refreshToken") String refreshToken,
                                            HttpServletResponse response) throws JsonProcessingException {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
 
-        JwtToken jwtToken = jwtService.validRefreshToken(userid, refreshToken);
+        JwtToken jwtToken = jwtService.validRefreshToken(username, refreshToken);
         Map<String, String> jsonResponse = jwtService.recreateTokenResponse(jwtToken);
 
         return jsonResponse;
     }
-
 }
